@@ -27,13 +27,14 @@ include 'headTagContainer.php';
         // Query the database to check if the user exists with the provided email and password
         $sql = "SELECT * FROM `user` WHERE `email` = '$email' AND `password` = '$password'";
         $result = mysqli_query($conn, $sql);
-
         if (mysqli_num_rows($result) > 0) {
             // User login is successful
             echo "<div id='login-success' class='w-25 bg-success mx-auto mt-3 text-center text-white py-2 rounded'>Login Successful</div>";
+            echo "<script>setTimeout(function() { document.getElementById('login-success').style.display = 'none'; }, 3000);</script>";
         } else {
             // User login failed
             echo "<div id='login-error' class='w-25 bg-danger mx-auto mt-3 text-center text-white py-2 rounded'>Login Failed</div>";
+            echo "<script>setTimeout(function() { document.getElementById('login-error').style.display = 'none'; }, 3000);</script>";
         }
     }
     ?>

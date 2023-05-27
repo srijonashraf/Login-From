@@ -22,12 +22,25 @@ include 'headTagContainer.php';
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        $sql = "INSERT INTO `user` (`name`, `email`, `password`) VALUES ('$name', '$email', '$password')";
+        // Check if the email already exists in the database
+        $checkEmailQuery = "SELECT * FROM `user` WHERE `email` = '$email'";
+        $checkEmailResult = mysqli_query($conn, $checkEmailQuery);
 
-        if (mysqli_query($conn, $sql)) {
-            echo "<div class='w-25 bg-success mx-auto mt-3 text-center text-white py-2 rounded'>Signed Up Successfully</div>";
+        if (mysqli_num_rows($checkEmailResult) > 0) {
+            // Email already exists, display an alert message
+            echo "<div id='email-exists' class='w-25 bg-danger mx-auto mt-3 text-center text-white py-2 rounded'>The user already exists!</div>";
+            // echo "<script>setTimeout(function() { document.getElementById('email-exists').style.display = 'none'; }, 3000);</script>";
         } else {
-            echo "<div class='w-25 bg-danger mx-auto mt-3 text-center text-white py-2 rounded'>Sign Up Error!</div>";
+            // Email does not exist, proceed with the signup process
+            $sql = "INSERT INTO `user` (`name`, `email`, `password`) VALUES ('$name', '$email', '$password')";
+
+            if (mysqli_query($conn, $sql)) {
+                echo "<div id='signup-success' class='w-25 bg-success mx-auto mt-3 text-center text-white py-2 rounded'>Signed Up Successfully</div>";
+                echo "<script>setTimeout(function() { document.getElementById('signup-success').style.display = 'none'; }, 3000);</script>";
+            } else {
+                echo "<div id='signup-error' class='w-25 bg-danger mx-auto mt-3 text-center text-white py-2 rounded'>Sign Up Error!</div>";
+                echo "<script>setTimeout(function() { document.getElementById('signup-error').style.display = 'none'; }, 3000);</script>";
+            }
         }
     }
     ?>
