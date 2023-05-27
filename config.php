@@ -16,6 +16,6 @@ if (!$conn) {
 //     echo"Connection stablished Successfully!";
 // }
 
-mysqli_query($conn,"USE myDB");
+mysqli_query($conn,"USE login");
 
 ?>

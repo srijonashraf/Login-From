@@ -22,27 +22,27 @@
             <input type="submit" class="btn btn-primary fw-bold" name="signup" value="Sign Up">
             <a href="./index.php" class="btn btn-success fw-bold text-white">Login</a>
 
-            <?php
-            if (isset($_POST['signup'])) {
-                require "config.php";
-
-                $name = $_POST["name"];
-                $email = $_POST["email"];
-                $password = $_POST["password"];
-
-                $sql = "INSERT INTO `user` (`name`, `email`, `password`) VALUES ('$name', '$email', '$password')";
-
-                if (mysqli_query($conn, $sql)) {
-                    echo "<div class='w-50 bg-success mx-auto mt-3 text-center text-white py-2 rounded'>Signed Up Successfully</div>";
-                } else {
-                    echo "<div class='w-50 bg-danger mx-auto mt-3 text-center text-white py-2 rounded'>Sign Up Error!</div>";
-                }
-            }
-            ?>
-
         </form>
-
     </div>
+    <?php
+    if (isset($_POST['signup'])) {
+        require "config.php";
+
+        $name = $_POST["name"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+
+        $sql = "INSERT INTO `user` (`name`, `email`, `password`) VALUES ('$name', '$email', '$password')";
+
+        if (mysqli_query($conn, $sql)) {
+            echo "<div class='w-25 bg-success mx-auto mt-3 text-center text-white py-2 rounded'>Signed Up Successfully</div>";
+        } else {
+            echo "<div class='w-25 bg-danger mx-auto mt-3 text-center text-white py-2 rounded'>Sign Up Error!</div>";
+        }
+    }
+    ?>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
